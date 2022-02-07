@@ -4,14 +4,14 @@ const { useState, useEffect } = React;
 const CONNECTION = "http://127.0.0.1:8080"
 
 // Utils
-async function getData(url='', auth='') {
+async function readFetch(url='', auth='') {
     const response = await fetch(url, {credentials:"omit"});
     return response.json();
 }
 
-async function postData(url='', body={}, auth='') {
+async function writeFetch(url='', method='POST', body={}, auth='') {
     const response = await fetch(url, {
-        method:         'POST',
+        method:         method,
         
         mode:           'cors',
         cache:          'no-cache',

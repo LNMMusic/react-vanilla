@@ -38,13 +38,15 @@ const Fetch = ({endpoint=null}) => {
         // fetch
         switch (state.method) {
             case 'GET':
-                getData(url)
+                readFetch(url)
                     .then(data => {alert(JSON.stringify(data))})
                 break;
             case 'POST':
-                postData(url, state.body)
+            case 'PUT':
+            case 'DELETE':
+                writeFetch(url, state.method, state.body)
                     .then(data => {alert(JSON.stringify(data))})
-            break;
+                break;
             default:
                 break;
         }
@@ -62,7 +64,7 @@ const Fetch = ({endpoint=null}) => {
 
                         <select className="uk-select uk-text-muted uk-text-bold" id="form-stacked-select"
                         name="method" onChange={(e) => handleChange(e)} value={state.method}>
-                            {["GET","POST"].map((method, index) => {
+                            {["GET","POST","PUT","DELETE"].map((method, index) => {
                                 return <option key={index}>{method}</option>
                             })}
                         </select>
